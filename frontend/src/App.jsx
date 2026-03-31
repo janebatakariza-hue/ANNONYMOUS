@@ -6,22 +6,21 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:3000/students");
-        setStudents(response.data.name);
+        console.log(response.data);
+        setStudents(response.data);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-    console.log(students);
-  }, [students]);
+  }, []);
 
   return (
     <>
-      <p>
-        {students.map((student) => {
-          return <p>{student}</p>;
-        })}
-      </p>
+      {students.map((student) => {
+        return <div key={student.id}>{student.name}</div>
+      
+      })}
       <p>Think its working</p>
     </>
   );
