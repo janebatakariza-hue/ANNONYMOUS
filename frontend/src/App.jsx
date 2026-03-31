@@ -1,19 +1,29 @@
 import axios from "axios";
+import { useState, useEffect } from "react";
 function App() {
-  const fetchData = async () => {
-    try {
-      await axios.get("http://localhost:3000/students");
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  const [students, setStudents] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/students");
+        setStudents(response.data.name);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+    console.log(students);
+  }, [students]);
 
-  const fetchedData = fetchData();
   return (
     <>
-      <p>{fetchedData}</p>
+      <p>
+        {students.map((student) => {
+          return <p>{student}</p>;
+        })}
+      </p>
       <p>Think its working</p>
     </>
-  )
+  );
 }
 export default App;
