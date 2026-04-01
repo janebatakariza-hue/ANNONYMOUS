@@ -18,8 +18,12 @@ function App() {
   return (
     <>
       {students.map((student) => {
-        return <div key={student.id}>{student.name}</div>
-      
+        return (
+          <div key={student._id}>
+            {student.name}
+            <br />
+          </div>
+        );
       })}
       <p>Think its working</p>
     </>
